@@ -2,6 +2,7 @@
 using Android.Widget;
 using Android.OS;
 using Android.Support.V7.App;
+using Android.Content;
 
 namespace AgendaPlanner_Reflection
 {
@@ -14,6 +15,8 @@ namespace AgendaPlanner_Reflection
 
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
+            Intent newActivity = new Intent(this, typeof(StudentsListActivity));
+            StartActivity(newActivity);
         }
     }
 }
