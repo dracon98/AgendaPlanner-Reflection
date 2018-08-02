@@ -35,7 +35,7 @@ namespace AgendaPlanner_Reflection
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             int id = item.ItemId;
-            if (id == Resource.Id.action_add)
+            if (id == Resource.Id.action_plus)
             {
                 Intent i = new Intent(this, typeof(AddDetailsActivity));
                 StartActivity(i);
