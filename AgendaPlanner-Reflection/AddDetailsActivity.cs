@@ -12,15 +12,17 @@ using Android.Widget;
 
 namespace AgendaPlanner_Reflection
 {
-    [Activity(Label = "Details")]
-    public class Details : Activity
+    [Activity(Label = "DetailsActivity")]
+    public class AddDetailsActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
-            SetContentView(Resource.Layout.details);
-            
+            SetContentView(Resource.Layout.add_details);
+            // Create your application here
         }
+
+
     }
 }

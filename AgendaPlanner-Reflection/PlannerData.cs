@@ -12,10 +12,9 @@ using Android.Widget;
 
 namespace AgendaPlanner_Reflection
 {
-    class StudentData
+    class PlannerData
     {
         private string title;
-        private string studentName;
         private string time;
         private string resultDet;
 
