@@ -24,7 +24,7 @@ namespace AgendaPlanner_Reflection
 
 			FloatingActionButton fab = FindViewById<FloatingActionButton>(Resource.Id.fab);
             fab.Click += FabOnClick;
-		}
+        }
 
 		public override bool OnCreateOptionsMenu(IMenu menu)
         {

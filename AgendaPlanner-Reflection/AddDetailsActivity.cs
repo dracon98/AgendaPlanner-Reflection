@@ -10,13 +10,25 @@ using Android.Content;
 namespace AgendaPlanner_Reflection
 {
     [Activity(Label = "DetailsActivity")]
+
     public class AddDetailsActivity : AppCompatActivity
     {
+        EditText start;
+        EditText end;
+        EditText title;
+        EditText description;
+        EditText location;
+        Database db;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
+            db = new Database();
             SetContentView(Resource.Layout.add_details);
+            start = FindViewById<EditText>(Resource.Id.event_start_date);
+            end = FindViewById<EditText>(Resource.Id.event_end_date);
+            title = FindViewById<EditText>(Resource.Id.event_title);
+            description = FindViewById<EditText>(Resource.Id.event_description);
+            location = FindViewById<EditText>(Resource.Id.event_location);
             // Create your application here
             if (ActionBar != null)
             {
@@ -36,7 +48,14 @@ namespace AgendaPlanner_Reflection
             int id = item.ItemId;
             if (id == Resource.Id.action_add)
             {
-                Intent i = new Intent(this, typeof(MainActivity));
+                PlannerData data = new PlannerData();
+                data.Location = location.Text;
+                data.Starts = start.Text;
+                data.Ends = end.Text;
+                data.Title = title.Text;
+                data.Description = description.Text;
+                db.insertIntoTable(data);
+                Intent i = new Intent(this, typeof(PlannerList));
                 StartActivity(i);
             }
 

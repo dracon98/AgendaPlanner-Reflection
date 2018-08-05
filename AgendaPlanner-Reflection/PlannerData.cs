@@ -12,30 +12,48 @@ using Android.Widget;
 
 namespace AgendaPlanner_Reflection
 {
-    class PlannerData
+    public class PlannerData
     {
         private string title;
-        private string time;
-        private string resultDet;
+        private string desc;
+        private string loc;
+        private string starts;
+        private string ends;
+        private int id;
 
         public string Title
         {
             get { return title; }
             set { title = value; }
         }
-        public string Time
+        public string Location
         {
-            get { return time; }
-            set { time = value; }
+            get { return loc; }
+            set { loc = value; }
         }
-        public string ResultDet
+        public string Description
         {
-            get { return resultDet;}
-            set { resultDet = value; }
+            get { return desc;}
+            set { desc = value; }
+        }
+        public string Starts
+        {
+            get { return starts; }
+            set { starts = value; }
+        }
+        public string Ends
+        {
+            get { return ends; }
+            set { ends = value; }
+        }
+        public int Id
+        {
+            get { return id; }
+            set { id = value; }
         }
         public override string ToString()
         {
-            return ResultDet + " | " + Title + "\nTime: " + Time;
+            return " "+ Starts +" | "+ Title + " " + Location + "\n "+ Ends +" | "+ Description;
         }
     }
 }
