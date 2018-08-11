@@ -55,6 +55,8 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArrayHelper.cs" />
+    <Compile Include="ExpandableListViewAdapter.cs" />
     <Compile Include="ListViewAdapter.cs" />
     <Compile Include="AddDetailsActivity.cs" />
     <Compile Include="Database.cs" />
@@ -136,6 +138,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\activity_ListView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\child.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

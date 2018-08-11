@@ -48,14 +48,16 @@ namespace AgendaPlanner_Reflection
             int id = item.ItemId;
             if (id == Resource.Id.action_add)
             {
-                PlannerData data = new PlannerData();
-                data.Location = location.Text;
-                data.Starts = start.Text;
-                data.Ends = end.Text;
-                data.Title = title.Text;
-                data.Description = description.Text;
+                PlannerData data = new PlannerData(){
+                    Location = location.Text,
+                    Starts = start.Text,
+                    Ends = end.Text,
+                    Title = title.Text,
+                    Description = description.Text
+                
+                };
                 db.insertIntoTable(data);
-                Intent i = new Intent(this, typeof(PlannerList));
+            Intent i = new Intent(this, typeof(PlannerList));
                 StartActivity(i);
             }
 

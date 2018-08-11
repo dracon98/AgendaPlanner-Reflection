@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:minWidth="25px"
     android:minHeight="25px">
@@ -17,17 +17,20 @@
             android:text="start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
             android:id="@+id/textview1" />
         <TextView
             android:text="end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/colorPrimaryDark"
             android:id="@+id/textview2" />
     </LinearLayout>
     <ImageView
         android:id="@+id/divider"
-        android:layout_width="1px"
+        android:layout_width="5px"
         android:layout_height="100px"
         android:layout_marginTop="10dp"
         android:background="@color/colorPrimaryDark"
@@ -48,22 +51,26 @@
             android:minHeight="25px">
             <TextView
                 android:text="title"
-                android:layout_marginRight="40dp"
+                android:layout_marginRight="100dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
                 android:id="@+id/textview3" />
             <TextView
                 android:text="location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
+                android:textColor="@color/colorPrimaryDark"
                 android:id="@+id/textview4" />
         </LinearLayout>
         <TextView
             android:text="description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
             android:id="@+id/textview5"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp" />
     </LinearLayout>
 </LinearLayout>

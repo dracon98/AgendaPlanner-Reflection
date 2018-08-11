@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,37 +8,37 @@ using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.V7.App;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
 
 namespace AgendaPlanner_Reflection
 {   [Activity]
-    class PlannerList : Activity
+    class PlannerList:AppCompatActivity
     {
-        ListView listData;
+        ExpandableListView listData;
         Database db = new Database();
-        private List<PlannerData> source = new List<PlannerData>();
+        ExpandableListViewAdapter ListAdapter;
+         List<PlannerData> source = new List<PlannerData>();
 
         protected override void OnCreate(Bundle bundle)
         {
             
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.activity_ListView);
-            listData = FindViewById<ListView>(Resource.Id.listView1);
+            listData = FindViewById<ExpandableListView>(Resource.Id.listView1);
             source = db.selectTableData();
-            var ListAdapter = new ListViewAdapter(this, source);
-            listData.Adapter = ListAdapter;
-            listData.TextFilterEnabled = true;
-            listData.ItemClick += delegate (object sender, AdapterView.ItemClickEventArgs args)
+            if (source != null)
             {
-                Toast.MakeText(Application, ((TextView)args.View).Text, ToastLength.Short).Show();
-                
-            };
+                ListAdapter = new ExpandableListViewAdapter(this, source);
+                Log.Info("txt", source.Count().ToString());
+                listData.SetAdapter(ListAdapter);
+                listData.TextFilterEnabled = true;
+                listData.ItemClick += delegate (object sender, AdapterView.ItemClickEventArgs args)
+                {
+                    
+                };
+            }
         }
-        public override bool OnCreateOptionsMenu(IMenu menu)
-        {
-            return true;
-        }
-
     }
 }

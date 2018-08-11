@@ -46,10 +46,17 @@ namespace AgendaPlanner_Reflection
             get { return ends; }
             set { ends = value; }
         }
-        public int Id
+        [SQLite.PrimaryKey, SQLite.AutoIncrement]
+        public int ID
         {
-            get { return id; }
-            set { id = value; }
+            get
+            {
+                return id;
+            }
+            set
+            {
+                id = value;
+            }
         }
         public override string ToString()
         {
