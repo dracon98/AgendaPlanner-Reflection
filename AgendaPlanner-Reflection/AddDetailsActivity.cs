@@ -30,7 +30,7 @@ namespace AgendaPlanner_Reflection
         DateTime nowTime;
         int year, month, day;
         int hour, min;
-        int id;
+        int id=0;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             //initialising
@@ -70,7 +70,7 @@ namespace AgendaPlanner_Reflection
             if (sid != null)
             {
                 start.Text = sid;
-                string[] tokens = sid.Split('-');
+                string[] tokens = sid.Split('/');
                 day = int.Parse(tokens[0]);
                 month = int.Parse(tokens[1]);
                 year = int.Parse(tokens[2]);
@@ -89,6 +89,13 @@ namespace AgendaPlanner_Reflection
                 string[] tokensE = source[0].Ends.Split('-');
                 end.Text = tokensE[0];
                 end_time.Text = tokensE[1];
+                string[] time = tokens[1].Split(':');
+                hour = int.Parse(time[0]);
+                min = int.Parse(time[1]);
+                string[] date = tokens[0].Split(':');
+                day = int.Parse(date[0]);
+                month = int.Parse(date[1]);
+                year = int.Parse(date[2]);
             }
             //on click of the start edit text
             // chaning the identification of dialog id
@@ -147,11 +154,6 @@ namespace AgendaPlanner_Reflection
                         Description = description.Text
                     };
                     //if the data already inside the data base then
-                    if (id != 0)
-                    {
-                        db.updateIntoTable(data);
-                    }
-                    else
                         db.insertIntoTable(data);// if not
                     //move to another activity
                     Intent i = new Intent(this, typeof(PlannerList));
@@ -170,48 +172,18 @@ namespace AgendaPlanner_Reflection
             {
                 case Date_dialog:
                     {
-                        if (id != 0)
-                        {
-                            List<PlannerData> source = db.selectQueryTable(id);
-                            string[] tokens = source[0].Starts.Split('-');
-                            string[] date = tokens[0].Split(':');
-                            day = int.Parse(date[0]);
-                            month = int.Parse(date[1]);
-                            year = int.Parse(date[2]);
-                        }
                         return new DatePickerDialog(this,this,year,month,day);
                     }
                 case End_dialog:
                     {
-                        List<PlannerData> source = db.selectQueryTable(id);
-                        string[] tokens = source[0].Ends.Split('-');
-                        string[] date = tokens[0].Split(':');
-                        day = int.Parse(date[0]);
-                        month = int.Parse(date[1]);
-                        year = int.Parse(date[2]);
                         return new DatePickerDialog(this, this, year, month, day);
                     }
                 case Time_dialog:
                     {
-                        if (id != 0) {
-                            List<PlannerData> source = db.selectQueryTable(id);
-                            string[] tokens = source[0].Starts.Split('-');
-                            string[] time = tokens[1].Split(':');
-                            hour = int.Parse(time[0]);
-                            min = int.Parse(time[1]);
-                        }
                         return new TimePickerDialog(this, this, hour, min, true);
                     }
                 case Endt_dialog:
                     {
-                        if (id != 0)
-                        {
-                            List<PlannerData> source = db.selectQueryTable(id);
-                            string[] tokens = source[0].Ends.Split('-');
-                            string[] time = tokens[1].Split(':');
-                            hour = int.Parse(time[0]);
-                            min = int.Parse(time[1]);
-                        }
                         return new TimePickerDialog(this, this, hour, min, true);
                     }
             }
