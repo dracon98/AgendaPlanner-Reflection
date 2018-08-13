@@ -1,0 +1,5 @@
+splash.png is my own picture || Richardo
+list.png, list18dp.png || https://www.flaticon.com/free-icon/clipboards_616947# || freepik || Free License (with attribution)
+calendar.png || https://www.flaticon.com/free-icon/calendar_747310#term=calendar&page=1&position=2 || freepik || Free License (with attribution)
+baseline_add_black_18dp.png || https://www.flaticon.com/free-icon/add_402592#term=add%20black&page=1&position=22 || SmashIcon || Free License (with attribution)
+baseline_search_black_18dp.png || https://www.flaticon.com/free-icon/search_402766#term=search%20black&page=1&position=14 || SmashIcon || Free License (with attribution)
