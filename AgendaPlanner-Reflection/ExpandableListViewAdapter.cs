@@ -51,7 +51,7 @@ namespace AgendaPlanner_Reflection
 
         public override long GetChildId(int groupPosition, int childPosition)
         {
-            return childPosition;
+            return listGroup[groupPosition].ID;
         }
 
         public override int GetChildrenCount(int groupPosition)
@@ -59,7 +59,8 @@ namespace AgendaPlanner_Reflection
 
             return 1;
         }
-
+        // this is for the child that will following the group or the parent
+        // the id of the child is the same as parent
         public override View GetChildView(int groupPosition, int childPosition, bool isLastChild, View convertView, ViewGroup parent)
         {
             var row = convertView;
@@ -73,8 +74,19 @@ namespace AgendaPlanner_Reflection
             btnDelete.Click +=
                 delegate
                 {
-                    db.deleteTableData(listGroup[groupPosition]);
-                    NotifyDataSetChanged();
+                    db.deleteQueryData(listGroup[groupPosition]);
+                    listGroup = db.selectTableData();
+                    
+                    Log.Info("textPosition", groupPosition.ToString());
+                    Intent i = new Intent(Context, typeof(PlannerList));
+                    Context.StartActivity(i);
+                };
+            btnEdit.Click +=
+                delegate
+                {
+                    Intent i = new Intent(Context, typeof(AddDetailsActivity));
+                    i.PutExtra("editID",listGroup[groupPosition].ID);
+                    Context.StartActivity(i);
                 };
             return row;
         }
@@ -88,18 +100,21 @@ namespace AgendaPlanner_Reflection
         {
             return listGroup[groupPosition].ID;
         }
-
+        // this is for the parent 
         public override View GetGroupView(int groupPosition, bool isExpanded, View convertView, ViewGroup parent)
         {
             View row = convertView;
             ViewHolder holder;
             if (listGroup.Count > 0)
             {
+                // if not created yet
                 if (row == null)
                 {
+                    //creating a view
                     row = LayoutInflater.From(Context).Inflate(Resource.Layout.ListAdapter, parent, false);
                     holder = new ViewHolder()
                     {
+                        //initialising
                         Location = row.FindViewById<TextView>(Resource.Id.textview5),
                         Title = row.FindViewById<TextView>(Resource.Id.textview3),
                         Description = row.FindViewById<TextView>(Resource.Id.textview4),
@@ -111,15 +126,17 @@ namespace AgendaPlanner_Reflection
                 else
                 {
                     holder = (ViewHolder)row.Tag;
-                }
-                PlannerData item = listGroup[groupPosition];
 
-                holder.Title.Text = item.Title;
-                holder.Description.Text = item.Location;
-                holder.Location.Text = item.Description;
-                holder.Starts.Text = item.Starts;
-                holder.Ends.Text = item.Ends;
-                Log.Info("i", groupPosition.ToString() + " " + listGroup.Count());
+                    //finding the item on the template
+                    PlannerData item = listGroup[groupPosition];
+
+                    holder.Title.Text = item.Title;
+                    holder.Description.Text = item.Location;
+                    holder.Location.Text = item.Description;
+                    holder.Starts.Text = item.Starts;
+                    holder.Ends.Text = item.Ends;
+                    Log.Info("i", groupPosition.ToString() + " " + listGroup.Count());
+                }
                 return row;
             }
             else
@@ -141,10 +158,6 @@ namespace AgendaPlanner_Reflection
             base.Dispose(disposing);
         }
 
-        protected override Java.Lang.Object Clone()
-        {
-            return base.Clone();
-        }
 
         public override bool Equals(Java.Lang.Object obj)
         {
@@ -166,58 +179,7 @@ namespace AgendaPlanner_Reflection
             return base.ToString();
         }
 
-        public override bool AreAllItemsEnabled()
-        {
-            return base.AreAllItemsEnabled();
-        }
-
-        public override int GetChildType(int groupPosition, int childPosition)
-        {
-            return base.GetChildType(groupPosition, childPosition);
-        }
-
-        public override long GetCombinedChildId(long groupId, long childId)
-        {
-            return base.GetCombinedChildId(groupId, childId);
-        }
-
-        public override long GetCombinedGroupId(long groupId)
-        {
-            return base.GetCombinedGroupId(groupId);
-        }
-
-        public override int GetGroupType(int groupPosition)
-        {
-            return base.GetGroupType(groupPosition);
-        }
-
-        public override void NotifyDataSetChanged()
-        {
-            base.NotifyDataSetChanged();
-            listGroup.Clear();
-            listGroup = db.selectTableData();
-        }
-
-        public override void NotifyDataSetInvalidated()
-        {
-            base.NotifyDataSetInvalidated();
-        }
-
-        public override void OnGroupCollapsed(int groupPosition)
-        {
-            base.OnGroupCollapsed(groupPosition);
-        }
-
-        public override void OnGroupExpanded(int groupPosition)
-        {
-            base.OnGroupExpanded(groupPosition);
-        }
-
-        public override void RegisterDataSetObserver(DataSetObserver observer)
-        {
-            base.RegisterDataSetObserver(observer);
-        }
-
+      
         public override void UnregisterDataSetObserver(DataSetObserver observer)
         {
             base.UnregisterDataSetObserver(observer);

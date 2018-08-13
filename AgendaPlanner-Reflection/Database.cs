@@ -80,7 +80,7 @@ namespace AgendaPlanner_Reflection
             {
                 using (var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "events.db")))
                 {
-                    connection.Query<PlannerData>("UPDATE Event set Title=?,Loc=?,Desc=?,Start=?,End=?",plannerData.Title,plannerData.Location,plannerData.Description,plannerData.Starts,plannerData.Ends);
+                    connection.Query<PlannerData>("UPDATE PlannerData set Title=?,Loc=?,Desc=?,Start=?,End=?", plannerData.Title, plannerData.Location, plannerData.Description, plannerData.Starts, plannerData.Ends);
                     return true;
                 }
             }
@@ -90,13 +90,13 @@ namespace AgendaPlanner_Reflection
                 return false;
             }
         }
-        public bool selectQueryTable(int id)
+        public bool deleteQueryData(PlannerData plannerData)
         {
             try
             {
                 using (var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "events.db")))
                 {
-                    connection.Query<PlannerData>("SELECT * FROM Event Where Id=?", id);
+                    connection.Query<PlannerData>("DELETE FROM PlannerData WHERE Id=?", plannerData.ID);
                     return true;
                 }
             }
@@ -104,6 +104,21 @@ namespace AgendaPlanner_Reflection
             {
                 Log.Info("SQL", ex.Message);
                 return false;
+            }
+        }
+        public List<PlannerData> selectQueryTable(int id)
+        {
+            try
+            {
+                using (var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "events.db")))
+                {
+                    return connection.Query<PlannerData>("SELECT * FROM PlannerData Where Id=?", id).ToList();
+                }
+            }
+            catch (SQLite.SQLiteException ex)
+            {
+                Log.Info("SQL", ex.Message);
+                return null;
             }
         }
     }

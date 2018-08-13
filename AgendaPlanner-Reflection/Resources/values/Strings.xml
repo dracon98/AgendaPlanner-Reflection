@@ -2,6 +2,7 @@
   <string name="action_search"></string>
   <string name="app_name">AgendaPlanner-Reflection</string>
 
-  <string name="action_plus"></string>
+  <string name="action_list"></string>
   <string name="action_add">Add</string>
-</resources>
+  <string name="action_calendar"></string>
+</resources>    
