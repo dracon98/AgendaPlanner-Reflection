@@ -96,6 +96,7 @@ namespace AgendaPlanner_Reflection
                 day = int.Parse(date[0]);
                 month = int.Parse(date[1]);
                 year = int.Parse(date[2]);
+                db.deleteQueryData(source[0]);
             }
             //on click of the start edit text
             // chaning the identification of dialog id
